@@ -3,6 +3,14 @@
 
 A brief description of what this project does and who it's for
 
+## Installation
+
+Install my-project with npm
+
+```bash
+  npm i
+  
+```
 
 ## Deployment
 
@@ -13,7 +21,7 @@ To deploy this project run
 ```
 
 
-## API Reference
+
 
 #### To Register in Database
 
