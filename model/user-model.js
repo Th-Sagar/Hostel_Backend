@@ -2,11 +2,26 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { string } = require("zod");
 
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
+  },
+  firstname:{
+    type:String,
+    required:true,
+
+  },
+  lastname:{
+    type:String,
+    required:true
+
+  },
+  address:{
+    type:String,
+    required:true
   },
   email: {
     type: String,
@@ -28,7 +43,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre("save", async function () {
   const user = this;
- 
+
   try {
     const saltRound = await bcrypt.genSalt(10);
     const hash_password = await bcrypt.hash(user.password, saltRound);
@@ -58,7 +73,5 @@ userSchema.methods.generateToken = async function () {
 userSchema.methods.comparePassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
-
 const User = new mongoose.model("User", userSchema);
-
 module.exports = User;

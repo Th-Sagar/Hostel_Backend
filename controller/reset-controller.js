@@ -6,13 +6,10 @@ const resetController = async (req, res) => {
   try {
     const { email } = req.body;
     const userExist = await User.findOne({ email: email });
-    if (!userExist) {
-      return res.status(400).json({ message: "User does not exist" });
-    }
+   
     const resetToken = Math.floor(100000 + Math.random() * 900000);
     const expirationTime = new Date();
     expirationTime.setMinutes(expirationTime.getMinutes() + 5);
-
     const resetPassword = await Reset.create({
       email: email,
       resetToken: resetToken,
@@ -25,6 +22,7 @@ const resetController = async (req, res) => {
         user: "garry15@ethereal.email",
         pass: "qQZfRR1Rut547uQDJe",
       },
+
     });
 
     async function main() {
@@ -34,7 +32,6 @@ const resetController = async (req, res) => {
         subject: "To reset your password for Hostel Management System",
         text: `Hello ${userExist.username} your reset password token for  Hostel Management System is  ${resetToken} `,
       });
-      
     }
     main().catch(console.error);
     res.status(200).json({ msg: resetPassword });
