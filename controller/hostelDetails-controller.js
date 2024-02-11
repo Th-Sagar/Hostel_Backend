@@ -100,6 +100,33 @@ const hostelDelete = async (req, res) => {
     console.log(error);
   }
 };
+const searchDetails=async(req,res)=>{
+
+  try {
+    const searchName = req.query.name;
+    const searchLocation = req.query.location;
+    const hostel = await Hostel.find({
+      $or: [
+        { hostelName: searchName },
+        { hostelLocation: searchLocation }
+      ]
+    });
+    
+    if (hostel.length === 0) {
+      return res.status(404).json({ message: "No hostel found" });
+    }
+  
+    res.status(200).json({
+      message:hostel
+      
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  
+ 
+
+}
 
 module.exports = {
   hostelDetailsController,
@@ -107,4 +134,5 @@ module.exports = {
   showHostelOne,
   updateHostel,
   hostelDelete,
+  searchDetails
 };
