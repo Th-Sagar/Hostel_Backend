@@ -8,10 +8,10 @@ const hostelDetailsController = async (req, res) => {
       hostelLocation,
       hostelPrice,
       hostelDescription,
-      hostelImage,
       hostelRating,
       hostelContact,
     } = req.body;
+    const hostelImage = req.file.filename;
     const hostel = await Hostel.create({
       hostelName,
       hostelType,
