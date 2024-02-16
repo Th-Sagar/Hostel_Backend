@@ -4,7 +4,6 @@ const hostelDetailsController = async (req, res) => {
   try {
     const {
       hostelName,
-      hostelType,
       hostelLocation,
       hostelPrice,
       hostelDescription,
@@ -14,7 +13,6 @@ const hostelDetailsController = async (req, res) => {
     const hostelImage = req.file.filename;
     const hostel = await Hostel.create({
       hostelName,
-      hostelType,
       hostelLocation,
       hostelPrice,
       hostelDescription,
@@ -60,7 +58,6 @@ const updateHostel = async (req, res) => {
   const id = req.params.id;
   const {
     hostelName,
-    hostelType,
     hostelLocation,
     hostelPrice,
     hostelDescription,
@@ -73,7 +70,6 @@ const updateHostel = async (req, res) => {
     {
       $set: {
         hostelName,
-        hostelType,
         hostelLocation,
         hostelPrice,
         hostelDescription,
@@ -100,33 +96,25 @@ const hostelDelete = async (req, res) => {
     console.log(error);
   }
 };
-const searchDetails=async(req,res)=>{
-
+const searchDetails = async (req, res) => {
   try {
     const searchName = req.query.name;
     const searchLocation = req.query.location;
     const hostel = await Hostel.find({
-      $or: [
-        { hostelName: searchName },
-        { hostelLocation: searchLocation }
-      ]
+      $or: [{ hostelName: searchName }, { hostelLocation: searchLocation }],
     });
-    
+
     if (hostel.length === 0) {
       return res.status(404).json({ message: "No hostel found" });
     }
-  
+
     res.status(200).json({
-      message:hostel
-      
+      message: hostel,
     });
   } catch (error) {
     console.log(error);
   }
-  
- 
-
-}
+};
 
 module.exports = {
   hostelDetailsController,
@@ -134,5 +122,5 @@ module.exports = {
   showHostelOne,
   updateHostel,
   hostelDelete,
-  searchDetails
+  searchDetails,
 };

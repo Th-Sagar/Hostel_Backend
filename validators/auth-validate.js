@@ -27,17 +27,7 @@ const loginSchema = z.object({
 });
 
 const registerSchema = loginSchema.extend({
-  username: z
-    .string({
-      required_error: "Username is required",
-    })
-    .trim()
-    .min(3, {
-      message: " Username must be a valid",
-    })
-    .max(255, {
-      message: "Username must be a atmost 255 characters",
-    }),
+
     firstname: z
     .string({ required_error: "Firstname is required" })
     .trim()
@@ -48,23 +38,7 @@ const registerSchema = loginSchema.extend({
     .string({ required_error: "Lastname is required" })
     .trim()
     .min(3, { message: "Lastname must be a valid" })
-    .max(255, { message: "Lastname must be a atmost 255 characters" }),
-  address: z
-    .string({ required_error: "Address is required" })
-    .trim()
-    .min(3, { message: "Address must be a valid" })
-    .max(255, { message: "Address must be a atmost 255 characters" }),
-  phone: z
-    .string({
-      required_error: "Phone is required",
-    })
-    .trim()
-    .min(10, {
-      message: " Phone must be a valid",
-    })
-    .max(15, {
-      message: "Phone must be a atmost 255 characters",
-    }),
+    .max(255, { message: "Lastname must be a atmost 255 characters" })
 });
 
 module.exports = { loginSchema, registerSchema };

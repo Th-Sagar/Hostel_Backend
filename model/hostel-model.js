@@ -5,10 +5,6 @@ const hostelSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  hostelType: {
-    type: String,
-    required: true,
-  },
   hostelLocation: {
     type: String,
     required: true,
