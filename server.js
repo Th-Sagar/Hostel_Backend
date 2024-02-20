@@ -14,6 +14,7 @@ app.use('/api/user',updateRouter);
 app.use('/api/hostel',hostelDetailsRouter)
 
 
+
 connectDb().then(() => {
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

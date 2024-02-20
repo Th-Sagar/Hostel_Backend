@@ -9,22 +9,25 @@ const hostelDetailsController = async (req, res) => {
       hostelDescription,
       hostelRating,
       hostelContact,
+      hostelImage,
     } = req.body;
-    const hostelImage = req.file.filename;
+    // const hostelImage = req.file.filename;
     const hostel = await Hostel.create({
       hostelName,
       hostelLocation,
       hostelPrice,
       hostelDescription,
-      hostelImage,
       hostelRating,
       hostelContact,
+      hostelImage
     });
     res.status(201).json({
       message: hostel,
     });
   } catch (error) {
-    console.log(error);
+    res.status(400).json({
+      message: error.message,
+    });
   }
 };
 
@@ -34,7 +37,7 @@ const showHostelDetails = async (req, res) => {
     if (!hostel) return res.status(404).json({ message: "No hostel found" });
 
     res.status(200).json({
-      message: hostel,
+       hostel,
     });
   } catch (error) {
     console.log(error);
@@ -108,8 +111,7 @@ const searchDetails = async (req, res) => {
       return res.status(404).json({ message: "No hostel found" });
     }
 
-    res.status(200).json({
-      message: hostel,
+    res.status(200).json({hostel,
     });
   } catch (error) {
     console.log(error);

@@ -10,7 +10,7 @@ const hostelSchema = new mongoose.Schema({
     required: true,
   },
   hostelPrice: {
-    type: String,
+    type: Number,
     required: true,
   },
   hostelDescription: {
@@ -19,10 +19,9 @@ const hostelSchema = new mongoose.Schema({
   },
   hostelImage: {
     type: String,
-    required: true,
   },
   hostelRating: {
-    type: String,
+    type: Number,
     required: true,
   },
   hostelContact: {

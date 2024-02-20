@@ -7,6 +7,7 @@ const {
   updateHostel,
   hostelDelete,searchDetails
 } = require("../controller/hostelDetails-controller");
+const  bookController  = require('../controller/book-controller');
 const validate = require('../middleware/validate-middleware')
 const hostelSchema = require('../validators/hostel-validate')
 const upload = require('../middleware/multer-middleware')
@@ -17,5 +18,7 @@ router.route("/show/:id").get(showHostelOne);
 router.route('/search').get(searchDetails);
 router.route("/update/:id").patch(updateHostel);
 router.route("/delete/:id").delete(hostelDelete);
+router.route('/book').post(bookController)
+
 
 module.exports = router;
