@@ -19,7 +19,7 @@ const hostelDetailsController = async (req, res) => {
       hostelDescription,
       hostelRating,
       hostelContact,
-      hostelImage
+      hostelImage,
     });
     res.status(201).json({
       message: hostel,
@@ -33,16 +33,23 @@ const hostelDetailsController = async (req, res) => {
 
 const showHostelDetails = async (req, res) => {
   try {
-    const hostel = await Hostel.find();
+    const { skip, limit } = req.query;
+    const hostel = await Hostel.find().skip(skip).limit(limit);
+    const totalHostels = await Hostel.find().count();
+
     if (!hostel) return res.status(404).json({ message: "No hostel found" });
 
     res.status(200).json({
-       hostel,
+      hostel,
+      totalHostels,
     });
   } catch (error) {
     console.log(error);
   }
+
+  
 };
+
 const showHostelOne = async (req, res) => {
   try {
     const id = req.params.id;
@@ -111,8 +118,8 @@ const searchDetails = async (req, res) => {
       return res.status(404).json({ message: "No hostel found" });
     }
 
-    res.status(200).json({hostel,
-    });
+    
+    res.status(200).json({ hostel });
   } catch (error) {
     console.log(error);
   }

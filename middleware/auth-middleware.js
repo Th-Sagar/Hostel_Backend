@@ -1,16 +1,26 @@
 const User = require("../model/user-model");
 const jwt = require("jsonwebtoken");
 const authmiddleware = async (req, res, next) => {
+  const token = req.header("Authorization");
+  if (!token) {
+    return res.status(401).json({ message: "Access Denied" });
+    
+
+  }
+  const jwtToken = token.replace("Bearer", "").trim();
+
   try {
-    const token = req.header("Authorization");
-    if (!token) {
-      return res.status(401).json({ message: "Access Denied" });
-    }
-    const jwtToken = token.replace("Bearer", "").trim();
+  
     const isVerified = jwt.verify(jwtToken, process.env.JWT_SECRET_KEY);
-    if (!isVerified) {
-      return res.status(401).json({ message: "Invalid token" });
-    }
+    const userData= await User.findOne({email:isVerified.email}).select({
+      password:0
+    })
+
+    req.user= userData;
+    req.token = token;
+    req.userId = userData._id;
+    
+   
     next();
   } catch (error) {
     console.log(error);

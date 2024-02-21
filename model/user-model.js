@@ -2,7 +2,6 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { string } = require("zod");
 
 const userSchema = new mongoose.Schema({
  
@@ -48,6 +47,7 @@ userSchema.methods.generateToken = async function () {
     return jwt.sign(
       {
         userId: this._id.toString(),
+        firstname:this.firstname,
         email: this.email,
         isAdmin: this.isAdmin,
       },

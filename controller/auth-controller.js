@@ -65,4 +65,15 @@ const user = async(req,res)=>{
   }
 }
 
-module.exports = {login,register,user};
+
+const userToken =async(req,res)=>{
+  try {
+    const userData = req.user;
+    return res.status(200).json({user:userData})
+    
+  } catch (error) {
+    console.log("Error from the userToken controller",error)
+  }
+}
+
+module.exports = {login,register,user,userToken};
