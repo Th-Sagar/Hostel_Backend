@@ -1,5 +1,5 @@
 const User = require('../model/user-model')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 const updateController = async (req,res)=>{
     try {

@@ -1,36 +1,28 @@
-FROM node 
+FROM node:20-alpine3.18
 
-COPY package.json package.json
-COPY package-lock.json package-lock.json
-COPY .env .env
-COPY utils/cloudinary.js utils/cloudinary.js
-COPY utils/db.js utils/db.js
-COPY server.js server.js
+RUN addgroup app && adduser -S -G app app
 
-COPY router/auth-router.js router/auth-router.js
-COPY router/hostelDetails-router.js router/hostelDetails-router.js
-COPY router/update-router.js router/update-router.js
-COPY controller/auth-controller.js controller/auth-controller.js
+USER app
 
-COPY controller/hostelDetails-controller.js  controller/hostelDetails-controller.js
-COPY controller/password-controller.js  controller/password-controller.js
-COPY controller/reset-controller.js  controller/reset-controller.js
-COPY controller/token-controller.js  controller/token-controller.js
-COPY controller/update-controller.js  controller/update-controller.js
+WORKDIR /app
 
+COPY package*.json ./
 
-COPY middleware/auth-middleware.js middleware/auth-middleware.js
-COPY middleware/error-middleware.js middleware/error-middleware.js
-COPY middleware/multer-middleware.js middleware/multer-middleware.js
-COPY middleware/user-middleware.js middleware/user-middleware.js
-COPY middleware/validate-middleware.js middleware/validate-middleware.js
+# change ownership of the /app directory to the app user
+USER root
 
-COPY model/hostel-model.js model/hostel-model.js
-COPY model/reset-model.js model/reset-model.js
-COPY model/user-model.js model/user-model.js
+# change ownership of the /app directory to the app user
+# chown -R <user>:<group> <directory>
+# chown command changes the user and/or group ownership of for given file.
+RUN chown -R app:app .
 
-COPY validators/auth-validate.js validators/auth-validate.js
-COPY validators/hostel-validate.js validators/hostel-validate.js
+# change the user back to the app user
+USER app
 
-RUN npm install 
-ENTRYPOINT [ "node","server.js" ]
+RUN npm install
+
+COPY . . 
+
+EXPOSE 5000 
+
+CMD npm start

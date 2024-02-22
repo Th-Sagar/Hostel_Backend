@@ -1,6 +1,6 @@
 const User = require("../model/user-model");
 const Reset = require("../model/reset-model");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 const password = async (req, res) => {
   try {
