@@ -1,4 +1,4 @@
-const Book = require('../model/book-model.js')
+import Book from "../model/book-model.js";
 const bookController = async (req, res) => {
   try {
     const { userName, userContact, hostelName, hostelContact, hostelLocation } =
@@ -17,5 +17,4 @@ const bookController = async (req, res) => {
     console.log(error);
   }
 };
-
-module.exports = bookController;
+export default bookController;

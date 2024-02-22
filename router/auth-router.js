@@ -1,21 +1,27 @@
-const express = require("express");
+import express from "express";
+import {
+  login,
+  register,
+  user,
+  userToken,
+} from "../controller/auth-controller.js";
+
+import password from "../controller/password-controller.js";
+import usermiddleware from "../middleware/user-middleware.js";
+import resetController from "../controller/reset-controller.js";
+import tokenController from "../controller/token-controller.js";
+import validate from "../middleware/validate-middleware.js";
+import { loginSchema, registerSchema } from "../validators/auth-validate.js";
+import authmiddleware from "../middleware/auth-middleware.js";
+
 const router = express.Router();
-const { login, register,user, userToken } = require("../controller/auth-controller");
-const password = require("../controller/password-controller");
-const usermiddleware = require("../middleware/user-middleware");
-const resetController = require("../controller/reset-controller");
-const tokenController = require("../controller/token-controller");
-const validate=require('../middleware/validate-middleware')
-const {loginSchema, registerSchema} = require('../validators/auth-validate');
-const authmiddleware = require("../middleware/auth-middleware");
 
-
-router.route("/user").get(usermiddleware,user)
-router.route("/register").post(validate(registerSchema),register);
-router.route("/login").post(usermiddleware,validate(loginSchema), login);
+router.route("/user").get(usermiddleware, user);
+router.route("/register").post(validate(registerSchema), register);
+router.route("/login").post(usermiddleware, validate(loginSchema), login);
 router.route("/setPassword").post(usermiddleware, password);
-router.route("/usertoken").get(authmiddleware,userToken)
+router.route("/usertoken").get(authmiddleware, userToken);
 router.route("/reset").post(usermiddleware, resetController);
 router.route("/token").post(usermiddleware, tokenController);
 
-module.exports = router;
+export default router;

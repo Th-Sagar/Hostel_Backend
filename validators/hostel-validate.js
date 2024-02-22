@@ -1,4 +1,4 @@
-const { z } = require("zod");
+import { z } from "zod";
 
 const hostelSchema = z.object({
   hostelName: z
@@ -56,4 +56,4 @@ const hostelSchema = z.object({
     }),
 });
 
-module.exports = hostelSchema;
+export default hostelSchema;

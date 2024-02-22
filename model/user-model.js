@@ -1,19 +1,17 @@
-require("dotenv").config();
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 const userSchema = new mongoose.Schema({
- 
-  firstname:{
-    type:String,
-    required:true,
-
+  firstname: {
+    type: String,
+    required: true,
   },
-  lastname:{
-    type:String,
-    required:true
-
+  lastname: {
+    type: String,
+    required: true,
   },
 
   email: {
@@ -47,7 +45,7 @@ userSchema.methods.generateToken = async function () {
     return jwt.sign(
       {
         userId: this._id.toString(),
-        firstname:this.firstname,
+        firstname: this.firstname,
         email: this.email,
         isAdmin: this.isAdmin,
       },
@@ -64,4 +62,5 @@ userSchema.methods.comparePassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 const User = new mongoose.model("User", userSchema);
-module.exports = User;
+
+export default User;

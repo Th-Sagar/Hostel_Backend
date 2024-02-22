@@ -1,4 +1,4 @@
-const { z } = require("zod");
+import { z } from "zod";
 const loginSchema = z.object({
   email: z
     .string({ required_error: "Email is required" })
@@ -27,18 +27,19 @@ const loginSchema = z.object({
 });
 
 const registerSchema = loginSchema.extend({
-
-    firstname: z
+  firstname: z
     .string({ required_error: "Firstname is required" })
     .trim()
     .min(3, { message: "Firstname must be a valid" })
     .max(255, { message: "Firstname must be a atmost 255 characters" }),
 
-    lastname: z
+  lastname: z
     .string({ required_error: "Lastname is required" })
     .trim()
     .min(3, { message: "Lastname must be a valid" })
-    .max(255, { message: "Lastname must be a atmost 255 characters" })
+    .max(255, { message: "Lastname must be a atmost 255 characters" }),
 });
 
-module.exports = { loginSchema, registerSchema };
+// module.exports = { loginSchema, registerSchema };
+
+export  { loginSchema, registerSchema };

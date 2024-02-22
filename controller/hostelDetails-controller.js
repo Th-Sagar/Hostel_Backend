@@ -1,4 +1,4 @@
-const Hostel = require("../model/hostel-model");
+import Hostel from "../model/hostel-model.js";
 
 const hostelDetailsController = async (req, res) => {
   try {
@@ -46,8 +46,6 @@ const showHostelDetails = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-
-  
 };
 
 const showHostelOne = async (req, res) => {
@@ -118,14 +116,13 @@ const searchDetails = async (req, res) => {
       return res.status(404).json({ message: "No hostel found" });
     }
 
-    
     res.status(200).json({ hostel });
   } catch (error) {
     console.log(error);
   }
 };
 
-module.exports = {
+export  {
   hostelDetailsController,
   showHostelDetails,
   showHostelOne,
@@ -133,3 +130,4 @@ module.exports = {
   hostelDelete,
   searchDetails,
 };
+

@@ -1,6 +1,6 @@
-const User = require("../model/user-model");
-const Reset = require("../model/reset-model");
-const bcrypt = require("bcryptjs");
+import User from "../model/user-model.js";
+import Reset from "../model/reset-model.js";
+import bcrypt from "bcryptjs";
 
 const password = async (req, res) => {
   try {
@@ -26,4 +26,4 @@ const password = async (req, res) => {
   }
 };
 
-module.exports = password;
+export default password;

@@ -1,10 +1,8 @@
-const express = require("express");
+import express from "express";
+import updateController from "../controller/update-controller.js";
+import authmiddleware from "../middleware/auth-middleware.js";
 const router = express.Router();
-const updateController = require('../controller/update-controller')
-const authmiddleware = require('../middleware/auth-middleware')
 
+router.route("/update").patch(authmiddleware, updateController);
 
-router.route('/update').patch(authmiddleware,updateController);
-
-
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const hostelSchema = new mongoose.Schema({
   hostelName: {
@@ -31,4 +31,5 @@ const hostelSchema = new mongoose.Schema({
 });
 
 const Hostel = new mongoose.model("Hostel", hostelSchema);
-module.exports = Hostel;
+
+export default Hostel;

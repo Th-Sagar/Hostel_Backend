@@ -1,12 +1,12 @@
-const Reset = require("../model/reset-model");
-const User = require("../model/user-model");
-const nodemailer = require("nodemailer");
+import User from "../model/user-model.js";
+import Reset from "../model/reset-model.js";
+import nodemailer from "nodemailer";
 
 const resetController = async (req, res) => {
   try {
     const { email } = req.body;
     const userExist = await User.findOne({ email: email });
-   
+
     const resetToken = Math.floor(100000 + Math.random() * 900000);
     const expirationTime = new Date();
     expirationTime.setMinutes(expirationTime.getMinutes() + 5);
@@ -22,7 +22,6 @@ const resetController = async (req, res) => {
         user: "garry15@ethereal.email",
         pass: "qQZfRR1Rut547uQDJe",
       },
-
     });
 
     async function main() {
@@ -39,4 +38,5 @@ const resetController = async (req, res) => {
     console.log(error);
   }
 };
-module.exports = resetController;
+
+export default resetController;
