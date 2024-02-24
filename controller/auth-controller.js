@@ -37,6 +37,7 @@ const login = async (req, res) => {
         msg: "User login successfully",
         token: await userExist.generateToken(),
         userId: userExist._id.toString(),
+        user: userExist,
       });
     } else {
       res.status(400).json({ message: "Invalid email or password" });
@@ -64,4 +65,4 @@ const userToken = async (req, res) => {
     console.log("Error from the userToken controller", error);
   }
 };
-export  { login, register, user, userToken };
+export { login, register, user, userToken };
